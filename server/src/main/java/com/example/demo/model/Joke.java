@@ -1,18 +1,22 @@
 package com.example.demo.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.NotBlank;
+
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
-import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import java.util.Date;
 
 @Entity 
 @Table(name="joke")
-//@EntityListeners(AuditingEntityListener.class)
-//@JsonIgnoreProperties(value = {"createdAt","updatedAt"}, allowGetters = true)
 public class Joke {
 	
 	public Joke() {
@@ -34,12 +38,12 @@ public class Joke {
     @NotBlank
     private String content;
 
-    @Column(name = "created_on",nullable = false, updatable = true)
+    @Column(name = "created_on",nullable = true)
     @Temporal(TemporalType.TIMESTAMP)
     @CreatedDate
     private Date createdAt;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     @Temporal(TemporalType.TIMESTAMP)
     @LastModifiedDate
     private Date updatedAt;
