@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityNotFoundException;
@@ -39,6 +40,8 @@ public class JokeController {
 
     @PostMapping("/jokes")
     public List<Joke> createJoke(@RequestBody Joke joke){
+    	joke.setCreatedAt(new Date());
+    	joke.setUpdatedAt(new Date());
     	jokeService.add(joke);
         return jokeService.findAll();
     }
